@@ -1,0 +1,51 @@
+<%- include('./shared/header.ejs') %> 
+
+<div class="container text-center my-5">
+    <div class="user my-3">
+        <i class="far fa-edit user-icon"></i>
+        <h4 class="login">Register</h4>
+    </div>
+    <div class="card p-5 w-50 m-auto">
+        <% if (exists.length!=0) { %>
+         <div class="alert alert-danger text-center">
+             Account already exists
+         </div>
+        <% } %>
+        <% if (success.length!=0) { %>
+            <div class="alert alert-success text-center">
+                You've been registered successfully
+            </div>
+           <% } %>
+        <form method="POST" action="/handleRegister">
+            <input value="<%= oldInputs.length==0?'':oldInputs[0].name %>" class="form-control" placeholder="Enter your Name" type="text" name="name">
+            <% if (errors.find(x=>x.param=='name')) { %>
+             <div class="alert alert-danger text-center">
+                 Enter valid name
+             </div>
+            <% } %>
+            <input value="<%= oldInputs.length==0?'':oldInputs[0].email %>" class="form-control my-2 " placeholder="Enter your email" type="email" name="email">
+            <% if (errors.find(x=>x.param=='email')) { %>
+                <div class="alert alert-danger text-center">
+                    Enter valid email
+                </div>
+               <% } %>
+            <input class="form-control  " placeholder="Enter your Password" type="password" name="password">
+            <% if (errors.find(x=>x.param=='password')) { %>
+                <div class="alert alert-danger text-center">
+                    Enter valid password
+                </div>
+               <% } %>
+            <input class="form-control  my-2" placeholder="Password Confirmation" type="password" name="PasswordConfirmation">
+            <% if (errors.find(x=>x.param=='PasswordConfirmation')) { %>
+                <div class="alert alert-danger text-center">
+                    Passwords don't match
+                </div>
+               <% } %>
+            <button class="btn btn-default-outline my-4 w-100 rounded">Register</button>
+            <a class="btn btn-default-outline" href="/login">Login</a>
+        </form>
+    </div>
+</div>
+
+
+<%- include('./shared/footer.ejs') %> 
